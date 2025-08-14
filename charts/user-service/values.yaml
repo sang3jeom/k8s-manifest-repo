@@ -49,7 +49,7 @@ service:
   # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
   type: ClusterIP
   # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
-  port: 80
+  port: 8080
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
   enabled: false
@@ -107,6 +107,122 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
-nodeSelector: {}
 tolerations: []
 affinity: {}
+env:
+  - name: RDS_ENDPOINT
+    valueFrom:
+      configMapKeyRef:
+        name: sang3jeom-config
+        key: RDS_ENDPOINT
+  - name: RDS_DB_NAME
+    valueFrom:
+      configMapKeyRef:
+        name: sang3jeom-config
+        key: USER_DB_NAME
+  - name: DATASOURCE_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: USER_DB_USERNAME
+  - name: DATASOURCE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: USER_DB_PASSWORD
+  - name: SPRING_REDIS_HOST
+    value: "redis"
+  - name: SPRING_REDIS_PORT
+    value: "6379"
+  - name: JWT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: JWT_SECRET
+  - name: JWT_EXPIRATION_MS
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: JWT_EXPIRATION_MS
+  - name: GOOGLE_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: GOOGLE_CLIENT_ID
+  - name: GOOGLE_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: GOOGLE_CLIENT_SECRET
+  - name: KAKAO_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: KAKAO_CLIENT_ID
+  - name: KAKAO_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: KAKAO_CLIENT_SECRET
+  - name: AWS_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: AWS_ACCESS_KEY
+  - name: AWS_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: AWS_SECRET_KEY
+  - name: S3_BUCKET
+    valueFrom:
+      configMapKeyRef:
+        name: sang3jeom-config
+        key: S3_BUCKET
+  - name: S3_REGION
+    valueFrom:
+      configMapKeyRef:
+        name: sang3jeom-config
+        key: S3_REGION
+  - name: AWS_REGION
+    valueFrom:
+      configMapKeyRef:
+        name: sang3jeom-config
+        key: AWS_REGION
+  - name: BASE_URL
+    valueFrom:
+      configMapKeyRef:
+        name: sang3jeom-config
+        key: BASE_URL
+  - name: MAIL_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: GMAIL_USERNAME
+  - name: MAIL_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: sang3jeom-secrets
+        key: GMAIL_APP_PASSWORD
+  - name: SPRING_DATASOURCE_URL_FROM_CM
+    value: "USER_DB_URL"
+  - name: DATASOURCE_USERNAME_FROM_SECRET
+    value: "USER_DB_USERNAME"
+  - name: DATASOURCE_PASSWORD_FROM_SECRET
+    value: "USER_DB_PASSWORD"
+
+# NodeSelector 추가
+nodeSelector:
+  eks.amazonaws.com/nodegroup: s3j-node-app
+
+# Health Check 수정
+livenessProbe:
+  tcpSocket:
+    port: 8080
+  initialDelaySeconds: 40
+  periodSeconds: 20
+readinessProbe:
+  tcpSocket:
+    port: 8080
+  initialDelaySeconds: 20
+  periodSeconds: 10
