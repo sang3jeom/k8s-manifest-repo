@@ -13,7 +13,7 @@ spec:
       nodeSelector: {"eks.amazonaws.com/nodegroup": "s3j-node-app"}
       containers:
         - name: user-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:e3b6c468db7f0c278a80efd6e05d8b3ba0edbf0d
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:3ebade0db0b30c0f09a8f1648c25b436b1168b9c
           ports: [{containerPort: 8080}]
           env:
             - name: RDS_ENDPOINT
@@ -73,3 +73,7 @@ spec:
   selector: {app: user-service}
   ports: [{port: 8080, targetPort: 8080}]
   type: ClusterIP
+  template:
+    spec:
+      containers:
+        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:3ebade0db0b30c0f09a8f1648c25b436b1168b9c
