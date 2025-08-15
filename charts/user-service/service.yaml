@@ -6,6 +6,11 @@ metadata:
   labels: {app: user-service}
 spec:
   replicas: 2
+  strategy:                    # 추가
+    type: RollingUpdate        # 추가
+    rollingUpdate:             # 추가
+      maxUnavailable: 1        # 추가: 기존 Pod 1개 먼저 종료
+      maxSurge: 0              # 추가: 새 Pod 추가 없이 교체만
   selector: {matchLabels: {app: user-service}}
   template:
     metadata: {labels: {app: user-service}}
