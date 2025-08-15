@@ -6,11 +6,11 @@ metadata:
   labels: {app: user-service}
 spec:
   replicas: 2
-  strategy:                    # 추가
-    type: RollingUpdate        # 추가
-    rollingUpdate:             # 추가
-      maxUnavailable: 1        # 추가: 기존 Pod 1개 먼저 종료
-      maxSurge: 0              # 추가: 새 Pod 추가 없이 교체만
+  strategy: # 추가
+    type: RollingUpdate # 추가
+    rollingUpdate: # 추가
+      maxUnavailable: 1 # 추가: 기존 Pod 1개 먼저 종료
+      maxSurge: 0 # 추가: 새 Pod 추가 없이 교체만
   selector: {matchLabels: {app: user-service}}
   template:
     metadata: {labels: {app: user-service}}
@@ -18,7 +18,7 @@ spec:
       nodeSelector: {"eks.amazonaws.com/nodegroup": "s3j-node-app"}
       containers:
         - name: user-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:cfd0e588821d1689c8956f3769864c1db4de8636
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:58cd628f55a9663e84b6f8d3fc3370a0b6e469f9
           ports: [{containerPort: 8080}]
           env:
             - name: RDS_ENDPOINT
@@ -81,4 +81,4 @@ spec:
   template:
     spec:
       containers:
-        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:cfd0e588821d1689c8956f3769864c1db4de8636
+        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:58cd628f55a9663e84b6f8d3fc3370a0b6e469f9
