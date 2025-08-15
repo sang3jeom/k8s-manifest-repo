@@ -73,7 +73,3 @@ spec:
   selector: {app: user-service}
   ports: [{port: 8080, targetPort: 8080}]
   type: ClusterIP
-  template:
-    spec:
-      containers:
-        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:e3b6c468db7f0c278a80efd6e05d8b3ba0edbf0d
