@@ -17,20 +17,20 @@ spec:
     spec:
       nodeSelector: {"eks.amazonaws.com/nodegroup": "s3j-node-app"}
       containers:
-      - name: order-service
-        image: ${ECR}/sang3jeom/order-service:latest
-        ports: [ { containerPort: 8082 } ]
-        env:
-        - name: ORDER_DB_URL
-          valueFrom: { configMapKeyRef: { name: sang3jeom-config, key: ORDER_DB_URL } }
-        - name: ORDER_DB_USERNAME
-          valueFrom: { secretKeyRef: { name: sang3jeom-secrets, key: ORDER_DB_USERNAME } }
-        - name: ORDER_DB_PASSWORD
-          valueFrom: { secretKeyRef: { name: sang3jeom-secrets, key: ORDER_DB_PASSWORD } }
-        - name: USER_SERVICE_URL
-          value: http://user-service.dev.svc.cluster.local:8080
-        - name: KAKAO_SECRET_KEY
-          valueFrom: { secretKeyRef: { name: sang3jeom-secrets, key: KAKAO_SECRET_KEY } }
+        - name: order-service
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/order-service:c62c138734b51556ff5bf1cfff9300175544095a
+          ports: [{containerPort: 8082}]
+          env:
+            - name: ORDER_DB_URL
+              valueFrom: {configMapKeyRef: {name: sang3jeom-config, key: ORDER_DB_URL}}
+            - name: ORDER_DB_USERNAME
+              valueFrom: {secretKeyRef: {name: sang3jeom-secrets, key: ORDER_DB_USERNAME}}
+            - name: ORDER_DB_PASSWORD
+              valueFrom: {secretKeyRef: {name: sang3jeom-secrets, key: ORDER_DB_PASSWORD}}
+            - name: USER_SERVICE_URL
+              value: http://user-service.dev.svc.cluster.local:8080
+            - name: KAKAO_SECRET_KEY
+              valueFrom: {secretKeyRef: {name: sang3jeom-secrets, key: KAKAO_SECRET_KEY}}
 ---
 apiVersion: v1
 kind: Service
@@ -45,4 +45,4 @@ spec:
   template:
     spec:
       containers:
-        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/order-service:06a33d6f2a24dde8088b2ae07c6ca0300001b339
+        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/order-service:c62c138734b51556ff5bf1cfff9300175544095a
