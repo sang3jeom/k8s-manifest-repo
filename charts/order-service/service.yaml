@@ -29,6 +29,8 @@ spec:
           valueFrom: { secretKeyRef: { name: sang3jeom-secrets, key: ORDER_DB_PASSWORD } }
         - name: USER_SERVICE_URL
           value: http://user-service.dev.svc.cluster.local:8080
+        - name: KAKAO_SECRET_KEY
+          valueFrom: { secretKeyRef: { name: sang3jeom-secrets, key: KAKAO_SECRET_KEY } }
 ---
 apiVersion: v1
 kind: Service
