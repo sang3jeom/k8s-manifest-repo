@@ -11,14 +11,14 @@ spec:
     rollingUpdate: # 추가
       maxUnavailable: 1 # 추가: 기존 Pod 1개 먼저 종료
       maxSurge: 0 # 추가: 새 Pod 추가 없이 교체만
-  selector: {matchLabels: {app: image-service}}    
+  selector: {matchLabels: {app: image-service}}
   template:
     metadata: {labels: {app: image-service}}
     spec:
       nodeSelector: {"eks.amazonaws.com/nodegroup": "s3j-node-app"}
       containers:
         - name: image-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/image-service:e214108860697f1cb29ca88b3f2bda5f1233c9a7
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/image-service:b4e18adb2b210812ebfe9b22ece2865b5823631b
           ports: [{containerPort: 8000}]
           env:
             - name: AWS_ACCESS_KEY
@@ -57,4 +57,4 @@ spec:
   template:
     spec:
       containers:
-        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/image-service:e214108860697f1cb29ca88b3f2bda5f1233c9a7
+        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/image-service:b4e18adb2b210812ebfe9b22ece2865b5823631b
