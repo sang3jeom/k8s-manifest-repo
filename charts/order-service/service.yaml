@@ -18,7 +18,7 @@ spec:
       nodeSelector: {"eks.amazonaws.com/nodegroup": "s3j-node-app"}
       containers:
         - name: order-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/order-service:d4ca67c8f44c312131fc661a0805feeef94ced1d
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/order-service:fcd07bafdd3e432af3ac570fb0683d0518a29b3c
           ports: [{containerPort: 8082}]
           env:
             - name: ORDER_DB_URL
@@ -55,4 +55,4 @@ spec:
   template:
     spec:
       containers:
-        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/order-service:d4ca67c8f44c312131fc661a0805feeef94ced1d
+        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/order-service:fcd07bafdd3e432af3ac570fb0683d0518a29b3c
