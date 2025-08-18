@@ -3,54 +3,61 @@ kind: Deployment
 metadata:
   name: image-service
   namespace: dev
-  labels: { app: image-service }
+  labels: {app: image-service}
 spec:
   replicas: 2
-  selector: { matchLabels: { app: image-service } }
+  selector: {matchLabels: {app: image-service}}
   template:
+    spec:
+      containers:
+        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/image-service:e214108860697f1cb29ca88b3f2bda5f1233c9a7
   strategy: # 추가
     type: RollingUpdate # 추가
     rollingUpdate: # 추가
       maxUnavailable: 1 # 추가: 기존 Pod 1개 먼저 종료
       maxSurge: 0 # 추가: 새 Pod 추가 없이 교체만
-    metadata: { labels: { app: image-service } }
+    metadata: {labels: {app: image-service}}
     spec:
-      nodeSelector: { "eks.amazonaws.com/nodegroup": "s3j-node-app" }
+      nodeSelector: {"eks.amazonaws.com/nodegroup": "s3j-node-app"}
       containers:
-      - name: image-service
-        image: ${ECR}/sang3jeom/image-service:latest
-        ports: [ { containerPort: 8000 } ]
-        env:
-        - name: AWS_ACCESS_KEY
-          valueFrom: { secretKeyRef: { name: sang3jeom-secrets, key: AWS_ACCESS_KEY } }
-        - name: AWS_SECRET_KEY
-          valueFrom: { secretKeyRef: { name: sang3jeom-secrets, key: AWS_SECRET_KEY } }
-        - name: REPLICATE_API_TOKEN
-          valueFrom: { secretKeyRef: { name: sang3jeom-secrets, key: REPLICATE_API_TOKEN } }
-        - name: S3_BUCKET
-          valueFrom: { configMapKeyRef: { name: sang3jeom-config, key: S3_BUCKET } }
-        - name: S3_REGION
-          valueFrom: { configMapKeyRef: { name: sang3jeom-config, key: S3_REGION } }
-        - name: AWS_REGION
-          valueFrom: { configMapKeyRef: { name: sang3jeom-config, key: AWS_REGION } }
-        readinessProbe:
-          tcpSocket:
-            port: 8000
-          initialDelaySeconds: 20
-          periodSeconds: 10
-        livenessProbe:
-          tcpSocket:
-            port: 8000
-          initialDelaySeconds: 40
-          periodSeconds: 20
+        - name: image-service
+          image: ${ECR}/sang3jeom/image-service:latest
+          ports: [{containerPort: 8000}]
+          env:
+            - name: AWS_ACCESS_KEY
+              valueFrom: {secretKeyRef: {name: sang3jeom-secrets, key: AWS_ACCESS_KEY}}
+            - name: AWS_SECRET_KEY
+              valueFrom: {secretKeyRef: {name: sang3jeom-secrets, key: AWS_SECRET_KEY}}
+            - name: REPLICATE_API_TOKEN
+              valueFrom: {secretKeyRef: {name: sang3jeom-secrets, key: REPLICATE_API_TOKEN}}
+            - name: S3_BUCKET
+              valueFrom: {configMapKeyRef: {name: sang3jeom-config, key: S3_BUCKET}}
+            - name: S3_REGION
+              valueFrom: {configMapKeyRef: {name: sang3jeom-config, key: S3_REGION}}
+            - name: AWS_REGION
+              valueFrom: {configMapKeyRef: {name: sang3jeom-config, key: AWS_REGION}}
+          readinessProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 40
+            periodSeconds: 20
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: image-service
   namespace: dev
-  labels: { app: image-service }
+  labels: {app: image-service}
 spec:
-  selector: { app: image-service }
-  ports: [ { port: 8000, targetPort: 8000 } ]
-  type: ClusterIP 
+  selector: {app: image-service}
+  ports: [{port: 8000, targetPort: 8000}]
+  type: ClusterIP
+  template:
+    spec:
+      containers:
+        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/image-service:e214108860697f1cb29ca88b3f2bda5f1233c9a7
