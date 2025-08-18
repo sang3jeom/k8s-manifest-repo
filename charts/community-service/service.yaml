@@ -18,7 +18,7 @@ spec:
       nodeSelector: {"eks.amazonaws.com/nodegroup": "s3j-node-app"}
       containers:
         - name: community-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/community-service:402eb482dc5868f164f535544558eeb2a39e3cea
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/community-service:b03497b83bed5b08ebd3479ddf212c8f9abc2fa8
           ports: [{containerPort: 8083}]
           env:
             - name: COMMUNITY_DB_URL
@@ -43,4 +43,4 @@ spec:
   template:
     spec:
       containers:
-        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/community-service:402eb482dc5868f164f535544558eeb2a39e3cea
+        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/community-service:b03497b83bed5b08ebd3479ddf212c8f9abc2fa8
