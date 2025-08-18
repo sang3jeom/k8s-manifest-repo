@@ -18,7 +18,7 @@ spec:
       nodeSelector: {"eks.amazonaws.com/nodegroup": "s3j-node-app"}
       containers:
         - name: image-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/image-service:b4e18adb2b210812ebfe9b22ece2865b5823631b
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/image-service:27bb5746ffca62e75a2f469eeacc96721e75714a
           ports: [{containerPort: 8000}]
           env:
             - name: AWS_ACCESS_KEY
@@ -57,4 +57,4 @@ spec:
   template:
     spec:
       containers:
-        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/image-service:b4e18adb2b210812ebfe9b22ece2865b5823631b
+        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/image-service:27bb5746ffca62e75a2f469eeacc96721e75714a
