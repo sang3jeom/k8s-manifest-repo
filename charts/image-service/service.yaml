@@ -54,7 +54,3 @@ spec:
   selector: {app: image-service}
   ports: [{port: 8000, targetPort: 8000}]
   type: ClusterIP
-  template:
-    spec:
-      containers:
-        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/image-service:77cadf95d88944df744bc1d57720951ecfa3dfed

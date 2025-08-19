@@ -63,7 +63,3 @@ spec:
   selector: {app: review-service}
   ports: [{port: 8084, targetPort: 8084}]
   type: ClusterIP
-  template:
-    spec:
-      containers:
-        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/review-service:53839760fe3e7b02fb1e9f5be3ed7d1ccb8d5ec1
