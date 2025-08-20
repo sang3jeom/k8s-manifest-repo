@@ -16,6 +16,18 @@ spec:
     metadata: {labels: {app: review-service}}
     spec:
       nodeSelector: {"eks.amazonaws.com/nodegroup": "s3j-node-app"}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - review-service
+              topologyKey: kubernetes.io/hostname
       containers:
         - name: review-service
           image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/review-service:bc805b0967109d6287517364d8b82a2e0460fb50

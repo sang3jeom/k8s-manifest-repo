@@ -16,6 +16,18 @@ spec:
     metadata: {labels: {app: user-service}}
     spec:
       nodeSelector: {"eks.amazonaws.com/nodegroup": "s3j-node-app"}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - user-service
+              topologyKey: kubernetes.io/hostname
       containers:
         - name: user-service
           image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:bc805b0967109d6287517364d8b82a2e0460fb50
