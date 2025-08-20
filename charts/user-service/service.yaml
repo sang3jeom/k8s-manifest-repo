@@ -30,7 +30,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
         - name: user-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:bc805b0967109d6287517364d8b82a2e0460fb50
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:8c85335d15dbefd3066f82dc865156ad33436fd1
           ports: [{containerPort: 8080}]
           env:
             - name: RDS_ENDPOINT
