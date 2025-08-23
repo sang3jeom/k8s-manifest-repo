@@ -30,7 +30,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: review-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/review-service:140dd7aee3dc2c6ebda581525bec6e179bb0789f
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/review-service:0dd0fb83dfd2965ea29cf0de6f43afa4c6cae994
           ports: [{containerPort: 8084}]
           env:
             - name: RDS_ENDPOINT
@@ -76,4 +76,3 @@ spec:
   ports: [{port: 8084, targetPort: 8084}]
   type: ClusterIP
   template:
-
