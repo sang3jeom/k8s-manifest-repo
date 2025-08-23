@@ -30,7 +30,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: order-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/order-service:96e3d7bbf6de93d56c8a00973d00167b00e63284
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/order-service:781c2c251a58450b9adae97e5cf6b6de986f7827
           ports: [{containerPort: 8082}]
           env:
             - name: ORDER_DB_URL
