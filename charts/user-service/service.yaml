@@ -19,18 +19,18 @@ spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - user-service
-              topologyKey: kubernetes.io/hostname
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - user-service
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: user-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:8c85335d15dbefd3066f82dc865156ad33436fd1
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:140dd7aee3dc2c6ebda581525bec6e179bb0789f
           ports: [{containerPort: 8080}]
           env:
             - name: RDS_ENDPOINT
@@ -90,3 +90,7 @@ spec:
   selector: {app: user-service}
   ports: [{port: 8080, targetPort: 8080}]
   type: ClusterIP
+  template:
+    spec:
+      containers:
+        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/user-service:140dd7aee3dc2c6ebda581525bec6e179bb0789f
