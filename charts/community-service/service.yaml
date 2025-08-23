@@ -30,7 +30,7 @@ spec:
                 topologyKey: kubernetes.io/hostname
       containers:
         - name: community-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/community-service:0dd0fb83dfd2965ea29cf0de6f43afa4c6cae994
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/community-service:781c2c251a58450b9adae97e5cf6b6de986f7827
           ports: [{containerPort: 8083}]
           env:
             - name: COMMUNITY_DB_URL
