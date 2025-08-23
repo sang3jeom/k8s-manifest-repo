@@ -19,18 +19,18 @@ spec:
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - community-service
-              topologyKey: kubernetes.io/hostname
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - community-service
+                topologyKey: kubernetes.io/hostname
       containers:
         - name: community-service
-          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/community-service:8c85335d15dbefd3066f82dc865156ad33436fd1
+          image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/community-service:9a50f766b134350eccb0571521122ce079cbd2a8
           ports: [{containerPort: 8083}]
           env:
             - name: COMMUNITY_DB_URL
@@ -62,3 +62,7 @@ spec:
   selector: {app: community-service}
   ports: [{port: 8083, targetPort: 8083}]
   type: ClusterIP
+  template:
+    spec:
+      containers:
+        - image: 806070027856.dkr.ecr.ap-northeast-2.amazonaws.com/sang3jeom/community-service:9a50f766b134350eccb0571521122ce079cbd2a8
